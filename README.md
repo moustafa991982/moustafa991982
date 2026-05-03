@@ -35,6 +35,17 @@ Includes the secpol policy authoring, `secpolgenerate` / `secpolpush` workflows,
 
 **Why it matters for hiring teams:** Concrete demonstration of supply-chain threat modeling on a safety-certified RTOS — directly relevant to UN R155 CSMS evidence, ISO 21434 TARA, and post-SBOM attestation strategies.
 
+### [AI Agent Portfolio](https://github.com/moustafa991982/ai-agent-portfolio)
+**Production-deployed AI agents for research, content automation, sales intelligence, and RAG-based document Q&A.**
+
+A curated collection of 17+ AI agents built and deployed on Mind Studio, covering executive workflows from automated research reports and competitive intelligence to a domain-specific *EV Charging Management* RAG chatbot that ties directly into the e-mobility space I work in. Each agent is live and remixable.
+
+- **Research & intelligence:** webpage / YouTube / PDF summarizers, multi-source research report generator with citations, website-change monitor, company intelligence crawler
+- **Communication automation:** email thread summarizer & response drafter, personalized cold-outreach generator, LinkedIn post generator with human-review workflow, daily news digest delivery
+- **Domain RAG chatbots:** "Ask the Docs" assistants for Mind Studio and for EV charging station documentation
+
+**Why it matters for hiring teams:** Demonstrates I don't just architect security for AI systems — I ship practical AI automation. The combination of safety-critical embedded engineering + applied agentic AI is a rare profile, particularly relevant for SDV trust boundaries and AI-assisted security operations.
+
 ---
 
 ## 🛠️ Core Expertise
@@ -45,6 +56,7 @@ Includes the secpol policy authoring, `secpolgenerate` / `secpolpush` workflows,
 | **Platforms & RTOS** | QNX 8.0 · AUTOSAR Classic & Adaptive · Linux for safety-critical systems |
 | **Cryptography & PKI** | HSM integration (Aurix, CycurHSM) · OEM/V2G/eMSP/CPO PKI chains · SecOC · MACsec · post-quantum readiness |
 | **Confidential Computing** | AMD SEV-SNP · Intel TDX · Azure Confidential Containers · remote attestation |
+| **Applied AI** | Multi-agent workflow design · RAG architectures · safety-critical AI (SOTIF / ISO 21448) · vision-anomaly detection |
 | **Methodology** | TARA · CSMS · SBOM (SPDX-2.3) analysis · attack-surface modeling |
 
 ---
@@ -72,5 +84,6 @@ Selected long-form writing on LinkedIn covers ISO 15118 Plug & Charge PKI archit
 
 ## 📫 Contact
 
-For role discussions, advisory engagements, or speaking inquiries, the fastest path is LinkedIn. Happy to share more detail on either flagship project or my broader portfolio — including CEER VCU SRTM analysis, AURIX HSM firmware update architecture review, ISO 15118 four-chain PKI design, and AUTOSAR Adaptive Platform camera fusion service design — on request.
+For role discussions, advisory engagements, or speaking inquiries, the fastest path is LinkedIn. Happy to share more detail on any flagship project or my broader portfolio — including ISO 21434, UN R155, ISO 15118 four-chain PKI design, and AUTOSAR Adaptive Platform camera fusion service design — on request.
+
 https://www.linkedin.com/in/moustafa-e-b-7726aa14/?locale=en
