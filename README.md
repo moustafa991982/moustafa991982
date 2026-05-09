@@ -21,7 +21,7 @@ A production-style HSM daemon packaged for Azure Confidential Containers, target
 - Built in Go, designed around remote-attestation flows
 - Use case: OEM key-provisioning at end-of-line, fleet-scale credential rotation, cryptographic operations for ISO 15118 Plug & Charge contract certificates
 
-**Why it matters for hiring teams:** Bridges classical automotive HSM patterns (Infineon Aurix HSM, Bosch CycurHSM) with confidential-cloud primitives — a stack very few engineers have hands-on with end to end.
+
 
 ### [QNX-Resource-manager-attacks-with-Secpol-enabled](https://github.com/moustafa991982/QNX-Resource-manager-attacks-with-Secpol-enabled)
 **Offensive security research on QNX 8.0 secpol — supply-chain attack scenarios on automotive ECUs.**
@@ -33,7 +33,7 @@ Two attack scenarios discovered during ECU security research, demonstrated again
 
 Includes the secpol policy authoring, `secpolgenerate` / `secpolpush` workflows, and root-cause analysis (`resmgr_init` typing, errno 314).
 
-**Why it matters for hiring teams:** Concrete demonstration of supply-chain threat modeling on a safety-certified RTOS — directly relevant to UN R155 CSMS evidence, ISO 21434 TARA, and post-SBOM attestation strategies.
+
 
 ### [Cpyr](https://github.com/moustafa991982/Cpyr)
 **Deep anomaly detection for in-vehicle networks — reference implementation for SAE 2021-01-0196 (SOTIF in practice).**
@@ -45,7 +45,6 @@ A semi-supervised deep learning framework for detecting cyber-physical anomalies
 
 Companion to the SAE WCX 2021 paper *Putting Safety of Intended Functionality SOTIF into Practice* and the [ASRG community talk](https://www.youtube.com/watch?v=z3uAQIN0nYw).
 
-**Why it matters for hiring teams:** A concrete, peer-reviewed implementation at the SOTIF × cybersecurity intersection — exactly the territory ISO 21448 and the emerging ISO/PAS 8800 are pushing OEMs and Tier-1s into. Demonstrates ML systems thinking grounded in real automotive safety standards rather than generic AI work.
 
 ### [AI Agent Portfolio](https://github.com/moustafa991982/ai-agent-portfolio)
 **Production-deployed AI agents for research, content automation, sales intelligence, and RAG-based document Q&A.**
@@ -56,7 +55,6 @@ A curated collection of 17+ AI agents built and deployed on Mind Studio, coverin
 - **Communication automation:** email thread summarizer & response drafter, personalized cold-outreach generator, LinkedIn post generator with human-review workflow, daily news digest delivery
 - **Domain RAG chatbots:** "Ask the Docs" assistants for Mind Studio and for EV charging station documentation
 
-**Why it matters for hiring teams:** Demonstrates I don't just architect security for AI systems — I ship practical AI automation. The combination of safety-critical embedded engineering + applied agentic AI is a rare profile, particularly relevant for SDV trust boundaries and AI-assisted security operations.
 
 ---
 
