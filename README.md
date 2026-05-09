@@ -35,6 +35,18 @@ Includes the secpol policy authoring, `secpolgenerate` / `secpolpush` workflows,
 
 **Why it matters for hiring teams:** Concrete demonstration of supply-chain threat modeling on a safety-certified RTOS — directly relevant to UN R155 CSMS evidence, ISO 21434 TARA, and post-SBOM attestation strategies.
 
+### [Cpyr](https://github.com/moustafa991982/Cpyr)
+**Deep anomaly detection for in-vehicle networks — reference implementation for SAE 2021-01-0196 (SOTIF in practice).**
+
+A semi-supervised deep learning framework for detecting cyber-physical anomalies on automotive networks, addressing two distinct problems with a shared codebase:
+
+1. **Fuzz-attack detection on automotive Ethernet** — reconstruction-based autoencoders (Conv encoder, U-Net, Einstein-sum, U-Net + transformer-decoder variants) trained only on normal traffic. Hex-to-binary preprocessing collapses the output space and enables a **1.2 KB convolutional encoder** to match a 223 MB transformer on separation quality — small enough for ECU deployment.
+2. **LKA contextual anomaly detection (SOTIF case study)** — predictive context models (VIS predictor, LKA predictor) detect single-frame contextual anomalies, e.g., LKA disabled during a lane switch the driver did not initiate. Achieves **instantaneous trigger** (zero-batch lag) on the injected anomaly, validated with both BCE and SSIM losses.
+
+Companion to the SAE WCX 2021 paper *Putting Safety of Intended Functionality SOTIF into Practice* and the [ASRG community talk](https://www.youtube.com/watch?v=z3uAQIN0nYw).
+
+**Why it matters for hiring teams:** A concrete, peer-reviewed implementation at the SOTIF × cybersecurity intersection — exactly the territory ISO 21448 and the emerging ISO/PAS 8800 are pushing OEMs and Tier-1s into. Demonstrates ML systems thinking grounded in real automotive safety standards rather than generic AI work.
+
 ### [AI Agent Portfolio](https://github.com/moustafa991982/ai-agent-portfolio)
 **Production-deployed AI agents for research, content automation, sales intelligence, and RAG-based document Q&A.**
 
@@ -64,9 +76,9 @@ A curated collection of 17+ AI agents built and deployed on Mind Studio, coverin
 ## 🎤 Speaking & Publications
 
 - **IoT Tech Expo North America 2026** — *Designing Connected Devices with Security Built In* (Panel · San Jose, May 18–19, 2026)
-- **Automotive Security Research Group (ASRG)** — [*AI-based Security & Safety Anomaly Detection*](https://www.youtube.com/watch?v=z3uAQIN0nYw) (2020) · applying ISO/PAS 21448 (SOTIF) to anomaly detection for unknown attack vectors. Presented as CTO of Autonomous Instruments, where I led development of *Cpyr* — see the [real-world vision-anomaly demo](https://www.youtube.com/watch?v=eAX6_KAtLiQ) showing predictive collision alerts on reckless-driving scenarios.
+- **SAE WCX Digital Summit 2021** — Abdulazim, A., **Elbahaey, M.**, Mohamed, A., *[Putting Safety of Intended Functionality SOTIF into Practice](https://doi.org/10.4271/2021-01-0196)*. SAE Technical Paper 2021-01-0196. Reference implementation: [Cpyr](https://github.com/moustafa991982/Cpyr).
+- **Automotive Security Research Group (ASRG)** — [*AI-based Security & Safety Anomaly Detection*](https://www.youtube.com/watch?v=z3uAQIN0nYw) (2020) · companion talk to the SAE paper above, applying ISO/PAS 21448 (SOTIF) to anomaly detection for unknown attack vectors. Presented as CTO of Autonomous Instruments — see the [real-world vision-anomaly demo](https://www.youtube.com/watch?v=eAX6_KAtLiQ) showing predictive collision alerts on reckless-driving scenarios.
 - **NVIDIA GTC 2021** — automotive cybersecurity session
-- **SAE World Congress** — published research
 
 Selected long-form writing on LinkedIn covers ISO 15118 Plug & Charge PKI architecture, Azure Confidential Containers for SDV secure boot, and supply-chain trust boundaries for SDVs.
 
