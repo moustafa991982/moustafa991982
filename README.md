@@ -8,7 +8,7 @@ I work where automotive functional safety, cybersecurity engineering, and modern
 
 📍 Silver Spring, Maryland, USA · 🌍 Available for international engagements · 🗣️ Arabic / English / German
 
-#PQC
+
 ---
 
 ## 🔐 Featured Projects
