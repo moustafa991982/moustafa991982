@@ -4,13 +4,26 @@
 
 18 years building secure embedded platforms across OEMs and Tier-1s — Ford, CEER Motors (Saudi EV OEM), Aptiv, Valeo, Arrow. Currently leading systems engineering at [EVRaid](https://www.evraid.com).
 
-I work where automotive functional safety, cybersecurity engineering, and modern confidential-computing trust models intersect — ISO/SAE 21434, UN R155/R156, AUTOSAR Classic & Adaptive, HSM/PKI architecture, QNX RTOS security, SecOC, and TARA methodology.
+I work where automotive functional safety, cybersecurity engineering, and modern confidential-computing trust models intersect — ISO/SAE 21434, UN R155/R156, AUTOSAR Classic & Adaptive, HSM/PKI architecture, QNX RTOS security, SecOC, post-quantum cryptography for SDV, and TARA methodology.
 
 📍 Silver Spring, Maryland, USA · 🌍 Available for international engagements · 🗣️ Arabic / English / German
 
 ---
 
 ## 🔐 Featured Projects
+
+### [pqc-sdv-cvm](https://github.com/moustafa991982/pqc-sdv-cvm)
+**Post-quantum TLS to a Software-Defined Vehicle cloud backend — end-to-end on Azure SEV-SNP.**
+
+A measurement-grade reference architecture for what it actually costs to make an SDV cloud backend quantum-safe today, broken down by which layer of the stack you harden. Runs on real Azure infrastructure with measurements captured over a public-internet WAN path from a QEMU simulated VCU.
+
+- **TLS 1.3 with hybrid X25519MLKEM768 KEM** terminated by nginx + OpenSSL 3.5 inside an Azure AMD SEV-SNP confidential VM (`Standard_DC2as_v5`)
+- **Three certificate chains compared side-by-side:** `classical` (ECDSA throughout), `mixed` (ML-DSA-87/65 root + sub-CA, ECDSA leaf — the realistic 2027–2030 V2G PKI shape), `pqc` (ML-DSA all the way)
+- **Azure Key Vault Premium with Secure Key Release** — wrap keys bound to MAA attestation policies; leaf private keys as SKR-released secrets; cert chains served from Azure Blob Storage (ML-DSA chains exceed Key Vault's 25 KB secret limit — documented design pattern)
+- **Measured findings:** hybrid PQC KEM costs **+2.4 KB per handshake** to defeat harvest-now-decrypt-later; PQ-protecting the trust anchor costs **+18 KB** and **doubles TCP segments** on the wire; PQ leaf adds another **+3 KB** per handshake
+- **Honest limitations catalogue** — 12 production-blocking issues encountered and worked around, including the "Path 3" framing for SEV-SNP attestation on Ubuntu 22.04 CVM kernels (`/dev/sev-guest` not yet exposed, runtime falls back to managed-identity RBAC while preserving the SKR architecture)
+- Relevant to ISO 15118-20 PnC certificate-chain sizing, V2G Root rollover planning, NSA CNSA 2.0 timeline guidance
+
 
 ### [HSMConfidentialContainer](https://github.com/moustafa991982/HSMConfidentialContainer)
 **Confidential-computing HSM daemon for Software-Defined Vehicle secure boot key provisioning.**
@@ -62,10 +75,10 @@ A curated collection of 17+ AI agents built and deployed on Mind Studio, coverin
 
 | Domain | |
 |---|---|
-| **Standards & Regulation** | ISO/SAE 21434 · UN R155 / R156 · ISO 15118-2/-20 · ASPICE for Cybersecurity |
+| **Standards & Regulation** | ISO/SAE 21434 · UN R155 / R156 · ISO 15118-2/-20 · ASPICE for Cybersecurity · NSA CNSA 2.0 |
 | **Platforms & RTOS** | QNX 8.0 · AUTOSAR Classic & Adaptive · Linux for safety-critical systems |
-| **Cryptography & PKI** | HSM integration (Aurix, CycurHSM) · OEM/V2G/eMSP/CPO PKI chains · SecOC · MACsec · post-quantum readiness |
-| **Confidential Computing** | AMD SEV-SNP · Intel TDX · Azure Confidential Containers · remote attestation |
+| **Cryptography & PKI** | HSM integration (Aurix, CycurHSM) · OEM / V2G / eMSP / CPO PKI chains · SecOC · MACsec · **post-quantum cryptography (ML-KEM, ML-DSA, hybrid TLS 1.3)** |
+| **Confidential Computing** | AMD SEV-SNP · Intel TDX · Azure Confidential VMs & Containers · Microsoft Azure Attestation · Secure Key Release |
 | **Applied AI** | Multi-agent workflow design · RAG architectures · safety-critical AI (SOTIF / ISO 21448) · vision-anomaly detection |
 | **Methodology** | TARA · CSMS · SBOM (SPDX-2.3) analysis · attack-surface modeling |
 
@@ -78,7 +91,7 @@ A curated collection of 17+ AI agents built and deployed on Mind Studio, coverin
 - **Automotive Security Research Group (ASRG)** — [*AI-based Security & Safety Anomaly Detection*](https://www.youtube.com/watch?v=z3uAQIN0nYw) (2020) · companion talk to the SAE paper above, applying ISO/PAS 21448 (SOTIF) to anomaly detection for unknown attack vectors. Presented as CTO of Autonomous Instruments — see the [real-world vision-anomaly demo](https://www.youtube.com/watch?v=eAX6_KAtLiQ) showing predictive collision alerts on reckless-driving scenarios.
 - **NVIDIA GTC 2021** — automotive cybersecurity session
 
-Selected long-form writing on LinkedIn covers ISO 15118 Plug & Charge PKI architecture, Azure Confidential Containers for SDV secure boot, and supply-chain trust boundaries for SDVs.
+Selected long-form writing on LinkedIn covers ISO 15118 Plug & Charge PKI architecture, Azure Confidential Containers for SDV secure boot, post-quantum TLS migration for SDVs, and supply-chain trust boundaries.
 
 ---
 
@@ -94,6 +107,6 @@ Selected long-form writing on LinkedIn covers ISO 15118 Plug & Charge PKI archit
 
 ## 📫 Contact
 
-For role discussions, advisory engagements, or speaking inquiries, the fastest path is LinkedIn. Happy to share more detail on any flagship project or my broader portfolio — including ISO 21434, UN R155, ISO 15118 four-chain PKI design, and AUTOSAR Adaptive Platform camera fusion service design — on request.
+For role discussions, advisory engagements, or speaking inquiries, the fastest path is LinkedIn. Happy to share more detail on any flagship project or my broader portfolio — including ISO 21434, UN R155, ISO 15118 four-chain PKI design, post-quantum migration planning, and AUTOSAR Adaptive Platform camera fusion service design — on request.
 
 https://www.linkedin.com/in/moustafa-e-b-7726aa14/?locale=en
