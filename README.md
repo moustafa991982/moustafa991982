@@ -69,6 +69,17 @@ A curated collection of 17+ AI agents built and deployed on Mind Studio, coverin
 - **Communication automation:** email thread summarizer & response drafter, personalized cold-outreach generator, LinkedIn post generator with human-review workflow, daily news digest delivery
 - **Domain RAG chatbots:** "Ask the Docs" assistants for Mind Studio and for EV charging station documentation
 
+### [zephyrbank-llm-redteam](https://github.com/moustafa991982/zephyrbank-llm-redteam)
+
+**LLM red-teaming — extracting a RAG chatbot's hidden system prompt with prompt injection, and why the role boundary holds.**
+
+A runnable demo that builds a realistic RAG customer-support bot (ZephyrBank) on a **local Ollama + llama3.1** stack, plants a secret in its system prompt, then attacks it with four escalating prompt-probing techniques driven by an automated, canary-based leak detector — a regression test you can re-run on every prompt or model change.
+
+- **Four prompt-injection attacks** — text-completion exploit, END-OF-TEXT + comma→semicolon transform (defeats exact-match output filters), START-OF-TEXT reframing, and an END-OF-PROMPT instruction-injection
+- **Key finding** — three probes blocked; the fourth leaked the RAG/context template but **not** the planted secret. The **system/user role boundary**, not a content filter, did the protecting (the injection's "print everything from the very top" only reached the user turn)
+- **Stack** — Python · Ollama · llama3.1 · OpenAI-compatible API · TF-IDF retrieval · automated canary leak detector
+- Bridges automotive security practice into **LLM / AI application security**; inspired by the Giskard × DeepLearning.AI course *Red Teaming LLMs Applications*
+- 🎥 [4-minute walkthrough](https://youtu.be/GN5nntCCmZM)
 
 ---
 
