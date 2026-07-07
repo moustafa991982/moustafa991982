@@ -13,6 +13,18 @@ I work where automotive functional safety, cybersecurity engineering, and modern
 
 ## 🔐 Featured Projects
 
+### [qcom-sec-demo](https://github.com/moustafa991982/qcom-sec-demo)
+**A runnable C++17 model of the Qualcomm Snapdragon platform-security stack on Linux — the trust chain built end-to-end, not just diagrammed.**
+
+A from-scratch implementation of the security primitives that underpin a Snapdragon platform, written to make the architecture *executable* with real crypto and honest "modelled-vs-silicon" boundaries. Nine pillars, wired together so measured boot flows into attestation and provisioning gates anti-rollback.
+
+- **TEE boundary & PKCS#11 over QCOMTEE** — a GlobalPlatform TEE Client API across an SMC / EL3 world-switch into a QTEE-style trusted application, with a PKCS#11 front-end exposing **two transports**: the SMC key path into QTEE, and a concurrent **no-SMC GPU DMA confined by the SMMU** (guest stage-1 / hypervisor stage-2)
+- **Hardware-bound sealing & PEE isolation** — HUK-derived **AES-256-GCM** sealing inside a **TLV trusted file system** (metadata header authenticated as GCM AAD); every object bound to its Protected Execution Environment (TrustZone QTEE vs Gunyah QTVM), so a blob sealed in one environment is cryptographically un-openable in another
+- **Secure boot → attestation → anti-rollback** — a fuse-anchored (`OEM_PK_HASH`) secure-boot chain records a measured-boot value that flows into an **ECDSA remote-attestation** quote (serial ‖ boot ‖ counter ‖ nonce), backed by an **RPMB** monotonic counter
+- **RPMB key provisioning modelled to the real state machine** — production key `RPMB_P_Key = KDF(SKDK, label, context)`, Apps-Secure/Debug fuse states, one-time irreversible provisioning + provision fuse, and MAC-authenticated replay-protected frames — sitting behind a `qsee_sfs`-shaped **Secure File System**, and emitting the real `QCPE_Config.xml` / `*_secimage.xml` build artifacts
+- **Real OpenSSL 3 crypto** (HKDF · AES-GCM · ECDSA P-256 · HMAC), **60 passing unit tests**, GitHub Actions CI on every push, and per-pillar sequence diagrams + a STRIDE / IoT-threat-landscape **coverage matrix** (`docs/`)
+- Maps directly to **Qualcomm Wireless Edge Services** device attestation & geofenced provisioning and the TrustZone-anchored cellular/modem security layer; relevant to ISO/SAE 21434 TARA and Snapdragon-based SDV cockpit isolation
+  
 ### [pqc-sdv-cvm](https://github.com/moustafa991982/pqc-sdv-cvm)
 **Post-quantum TLS to a Software-Defined Vehicle cloud backend — end-to-end on Azure SEV-SNP.**
 
