@@ -22,7 +22,7 @@ The performance behavior of hybrid and PQ TLS 1.3 is well established in the lit
 - **TLS 1.3 with hybrid X25519MLKEM768** terminated by nginx + OpenSSL 3.5 inside an AMD SEV-SNP confidential VM (`Standard_DC2as_v5`), keys held in Azure Key Vault Premium under attestation-gated Secure Key Release
 - **Three certificate chains compared for the V2G/PnC PKI roadmap:** classical (ECDSA), mixed (ML-DSA root + sub-CA, ECDSA leaf — the realistic 2027–2030 shape), and full ML-DSA
 - **Automotive-relevant measurements:** hybrid KEM +2.4 KB per handshake; PQ trust anchor +18 KB and 2.6× TCP segments on the wire; ML-DSA chains exceed Key Vault's 25 KB secret limit (documented workaround via Blob-served chains) — inputs for ISO 15118-20 certificate sizing, V2G Root rollover planning, and CNSA 2.0 migration timelines
-- **Honest limitations catalogue** — 12 production-blocking issues encountered and worked around, written up so program teams don't rediscover them
+
 
 ### [HSMConfidentialContainer](https://github.com/moustafa991982/HSMConfidentialContainer)
 
