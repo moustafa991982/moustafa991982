@@ -62,6 +62,17 @@ A hands-on security assessment of ZephyrBank, a retrieval-augmented chatbot for 
 
 Part of a broader AI-security focus that includes LLM threat modeling and adversarial ML — the direction I'm actively building toward alongside the automotive work.
 
+### [pi-harness](https://github.com/moustafa991982/example_promptinjection)
+
+**A reproducible prompt-injection red-team harness — turning "is this model injectable?" into a metric you can track across models, prompts, and mitigations.**
+
+Where the ZephyrBank work is a manual assessment of one application, this is the reusable instrument behind it: a CLI harness that runs a prompt-injection corpus against any OpenAI-compatible or Ollama target, scores each attempt with a string matcher plus an independent canary check, and reports an **Attack Success Rate (ASR)** — the same move as a TARA, replacing a subjective "seems robust" with a repeatable number and an evidence trail.
+
+- **Two threat models, one command:** `direct` (payload in the user turn — base-model alignment) and `indirect` (payload wrapped in an untrusted retrieved document behind an innocuous user turn — deployed RAG risk), so the harness measures the *application*, not just the model
+- **Honest aggregation:** ASR is scored *max-over-repeats* — a case counts vulnerable if any repeat lands, because an attacker only needs one — with errored trials excluded from the denominator and resume/rescore support for large runs
+- **Example finding (`llama3.1:latest`, baseline, direct vector):** **45.7% case-level ASR** — but the interesting part is the split. The model refused **every** classic named DAN jailbreak (0% across 13 cases) while falling to **hijacking-style** injections **80%** of the time (long-prompt and content-hijacking families landing most reliably). Resistance to well-known jailbreak *brands* did not translate into resistance to injection in general — exactly the kind of blind spot a checklist-style review misses
+- **Portfolio point:** the deployment-realistic layer of the AI-security track — attack corpus, reproducible methodology, and quantified results, structured the way an OEM cybersecurity assessment expects evidence to be structured
+
 ### [AI Agent Portfolio](https://github.com/moustafa991982/ai-agent-portfolio)
 
 **17+ production-deployed AI agents** on Mind Studio — research report generation with citations, competitive intelligence, communication automation, and domain RAG chatbots including an *EV Charging Management* documentation assistant tied to the e-mobility work above.
@@ -76,7 +87,7 @@ Part of a broader AI-security focus that includes LLM threat modeling and advers
 | **Platforms & RTOS** | QNX 8.0 · AUTOSAR Classic & Adaptive · Linux for safety-critical systems |
 | **Cryptography & PKI** | HSM integration (Aurix, CycurHSM) · OEM / V2G / eMSP / CPO PKI chains · SecOC · MACsec · PQC deployment (ML-KEM, ML-DSA, hybrid TLS 1.3) |
 | **Confidential Computing** | AMD SEV-SNP · Intel TDX · Azure Confidential VMs & Containers · Microsoft Azure Attestation · Secure Key Release |
-| **Applied AI & AI Security** | LLM red-teaming · multi-agent workflow design · RAG architectures · safety-critical AI (SOTIF / ISO 21448) · vision-anomaly detection |
+| **Applied AI & AI Security** | LLM red-teaming · prompt-injection assessment & ASR benchmarking · multi-agent workflow design · RAG architectures · safety-critical AI (SOTIF / ISO 21448) · vision-anomaly detection |
 | **Methodology** | TARA · CSMS · SBOM (SPDX-2.3) analysis · attack-surface modeling · supplier deliverable assessment |
 
 ---
