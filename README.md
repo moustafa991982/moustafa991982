@@ -72,9 +72,9 @@ Turns "is this model injectable?" into a metric you can track across models, pro
 - **A real deployment finding, not just a benchmark:** under a realistic support-assistant system profile, a custom prompt-leak probe drove the model to **disclose its protected service key (canary leak)** — and it landed through the *indirect* vector while `direct` scored 0%, which is precisely how a RAG deployment gets hit.
 - **Honest aggregation:** ASR is scored *max-over-repeats* (a case counts vulnerable if any repeat lands — an attacker only needs one), errored trials are excluded from the denominator, and families tested with too few trials are flagged **UNTESTED** rather than "safe," because 0% over 3 trials has a 95% upper bound near 56%. Resume/rescore support makes large runs auditable.
 
-### [zephyrbank-llm-redteam](https://github.com/moustafa991982/zephyrbank-llm-redteam)
+### [RAG_redteam](https://github.com/moustafa991982/RAG_redteam)
 
-**Red-teaming a production-style LLM banking assistant — adversarial testing across the OWASP LLM risk categories.**
+**Red-teaming a production-style RAG banking assistant — adversarial testing across the OWASP LLM risk categories.**
 
 A hands-on security assessment of ZephyrBank, a retrieval-augmented chatbot for a fictional business bank, applying both manual adversarial prompting and Giskard's automated LLM scan. Where the harness above is the reusable instrument, this is the full manual assessment of one application end-to-end.
 
