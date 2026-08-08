@@ -12,6 +12,12 @@
 
 ## 🔐 Featured Projects
 
+Two tracks: the automotive & embedded security work that is my 18-year core, and a growing AI-security track that applies the same adversarial, evidence-driven discipline to LLM-integrated systems.
+
+---
+
+## 🚗 Automotive & Embedded Security
+
 ### [pqc-sdv-cvm](https://github.com/moustafa991982/pqc-sdv-cvm)
 
 **What post-quantum TLS actually costs a Software-Defined Vehicle backend — measured end-to-end on Azure SEV-SNP, layer by layer.**
@@ -22,7 +28,6 @@ The performance behavior of hybrid and PQ TLS 1.3 is well established in the lit
 - **TLS 1.3 with hybrid X25519MLKEM768** terminated by nginx + OpenSSL 3.5 inside an AMD SEV-SNP confidential VM (`Standard_DC2as_v5`), keys held in Azure Key Vault Premium under attestation-gated Secure Key Release
 - **Three certificate chains compared for the V2G/PnC PKI roadmap:** classical (ECDSA), mixed (ML-DSA root + sub-CA, ECDSA leaf — the realistic 2027–2030 shape), and full ML-DSA
 - **Automotive-relevant measurements:** hybrid KEM +2.4 KB per handshake; PQ trust anchor +18 KB and 2.6× TCP segments on the wire; ML-DSA chains exceed Key Vault's 25 KB secret limit (documented workaround via Blob-served chains) — inputs for ISO 15118-20 certificate sizing, V2G Root rollover planning, and CNSA 2.0 migration timelines
-
 
 ### [HSMConfidentialContainer](https://github.com/moustafa991982/HSMConfidentialContainer)
 
@@ -50,28 +55,32 @@ Semi-supervised deep learning for cyber-physical anomaly detection on automotive
 
 Companion to SAE WCX 2021 *Putting Safety of Intended Functionality SOTIF into Practice* and the [ASRG talk](https://www.youtube.com/watch?v=z3uAQIN0nYw).
 
+---
+
+## 🤖 AI Security
+
+The bridge from 18 years of embedded/automotive security into AI security: the same TARA-style adversarial mindset — think like the attacker, quantify the failure, document it as evidence a team can act on — applied to LLM-integrated systems. This track runs from a manual application assessment, to a reusable measurement instrument, to production agent deployment.
+
+### [llama3.1_promptinjection](https://github.com/moustafa991982/llama3.1_promptinjection)
+
+**A reproducible prompt-injection red-team harness — and a measured assessment of Llama 3.1 (8B) with it.**
+
+Turns "is this model injectable?" into a metric you can track across models, prompts, and mitigations. A CLI harness runs a prompt-injection corpus (Giskard, cloned at runtime) against any OpenAI-compatible or Ollama target, scores each attempt with a string matcher plus an independent **canary** check, and reports an **Attack Success Rate (ASR)** with Wilson confidence intervals per attack family — the same move as a TARA, replacing a subjective "seems robust" with a repeatable number and an evidence trail.
+
+- **Two threat models, one command:** `direct` (payload in the user turn — base-model alignment) and `indirect` (payload wrapped in an untrusted retrieved document behind an innocuous user turn — deployed RAG risk), so the harness measures the *application*, not just the model.
+- **Headline finding on `llama3.1:latest`:** resistance to well-known jailbreak *brands* did **not** translate into resistance to injection in general. The classic **DAN** family was refused outright (**0% across 39 direct trials**), while **long-prompt hijacking landed 100% (15/15)** and **hate-speech hijacking 80% (12/15)** — exactly the blind spot a checklist-style review misses.
+- **A real deployment finding, not just a benchmark:** under a realistic support-assistant system profile, a custom prompt-leak probe drove the model to **disclose its protected service key (canary leak)** — and it landed through the *indirect* vector while `direct` scored 0%, which is precisely how a RAG deployment gets hit.
+- **Honest aggregation:** ASR is scored *max-over-repeats* (a case counts vulnerable if any repeat lands — an attacker only needs one), errored trials are excluded from the denominator, and families tested with too few trials are flagged **UNTESTED** rather than "safe," because 0% over 3 trials has a 95% upper bound near 56%. Resume/rescore support makes large runs auditable.
+
 ### [zephyrbank-llm-redteam](https://github.com/moustafa991982/zephyrbank-llm-redteam)
 
 **Red-teaming a production-style LLM banking assistant — adversarial testing across the OWASP LLM risk categories.**
 
-A hands-on security assessment of ZephyrBank, a retrieval-augmented chatbot for a fictional business bank, applying both manual adversarial prompting and Giskard's automated LLM scan. The same discipline I apply to automotive ECUs — think like the attacker, then document the failure mode so the team can fix it — carried into the LLM layer.
+A hands-on security assessment of ZephyrBank, a retrieval-augmented chatbot for a fictional business bank, applying both manual adversarial prompting and Giskard's automated LLM scan. Where the harness above is the reusable instrument, this is the full manual assessment of one application end-to-end.
 
 - **Threat categories exercised:** prompt injection and instruction override, sensitive-information / system-prompt disclosure, RAG data leakage, bias and stereotyped output, hallucination under adversarial framing, and denial-of-service style prompt abuse
 - **Method:** manual probe design plus automated scanning, with each finding written up as an attack narrative → root cause → mitigation, mapped to the OWASP Top 10 for LLM Applications
-- **Why it's here:** the bridge from 18 years of embedded/automotive security into AI security — the same TARA-style adversarial mindset applied to LLM-integrated systems, with a recorded walkthrough demonstrating the exploits end-to-end
-
-Part of a broader AI-security focus that includes LLM threat modeling and adversarial ML — the direction I'm actively building toward alongside the automotive work.
-
-### [pi-harness](https://github.com/moustafa991982/example_promptinjection)
-
-**A reproducible prompt-injection red-team harness — turning "is this model injectable?" into a metric you can track across models, prompts, and mitigations.**
-
-Where the ZephyrBank work is a manual assessment of one application, this is the reusable instrument behind it: a CLI harness that runs a prompt-injection corpus against any OpenAI-compatible or Ollama target, scores each attempt with a string matcher plus an independent canary check, and reports an **Attack Success Rate (ASR)** — the same move as a TARA, replacing a subjective "seems robust" with a repeatable number and an evidence trail.
-
-- **Two threat models, one command:** `direct` (payload in the user turn — base-model alignment) and `indirect` (payload wrapped in an untrusted retrieved document behind an innocuous user turn — deployed RAG risk), so the harness measures the *application*, not just the model
-- **Honest aggregation:** ASR is scored *max-over-repeats* — a case counts vulnerable if any repeat lands, because an attacker only needs one — with errored trials excluded from the denominator and resume/rescore support for large runs
-- **Example finding (`llama3.1:latest`, baseline, direct vector):** **45.7% case-level ASR** — but the interesting part is the split. The model refused **every** classic named DAN jailbreak (0% across 13 cases) while falling to **hijacking-style** injections **80%** of the time (long-prompt and content-hijacking families landing most reliably). Resistance to well-known jailbreak *brands* did not translate into resistance to injection in general — exactly the kind of blind spot a checklist-style review misses
-- **Portfolio point:** the deployment-realistic layer of the AI-security track — attack corpus, reproducible methodology, and quantified results, structured the way an OEM cybersecurity assessment expects evidence to be structured
+- **Recorded walkthrough** demonstrating the exploits end-to-end
 
 ### [AI Agent Portfolio](https://github.com/moustafa991982/ai-agent-portfolio)
 
