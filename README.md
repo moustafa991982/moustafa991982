@@ -16,7 +16,7 @@ Two tracks: the automotive & embedded security work that is my 18-year core, and
 
 ---
 
-## 🚗 Automotive & Embedded Security
+## 🚗 Infrastructure & Embedded Security
 
 ### [pqc-sdv-cvm](https://github.com/moustafa991982/pqc-sdv-cvm)
 
