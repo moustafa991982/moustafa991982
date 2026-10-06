@@ -55,6 +55,18 @@ Semi-supervised deep learning for cyber-physical anomaly detection on automotive
 
 Companion to SAE WCX 2021 *Putting Safety of Intended Functionality SOTIF into Practice* and the [ASRG talk](https://www.youtube.com/watch?v=z3uAQIN0nYw).
 
+### [AIModel_EoL_SecureProvisioning](https://github.com/moustafa991982/AIModel_EoL_SecureProvisioning)
+
+**Taking Cpyr from a TX2 prototype to a hardened NVIDIA Jetson deployment — secure manufacturing, encrypted boot, encryption at rest and fTPM remote attestation, end to end.**
+
+A reference design plus a runnable simulation of how an in-vehicle anomaly detector is provisioned, booted and trusted on a Jetson Orin-class platform:
+
+- **[Jetson Secure Provisioning Flow](https://moustafa991982.github.io/AIModel_EoL_SecureProvisioning/)** — a 40-step swimlane from OEM key generation and NVIDIA FSKP fuse provisioning to mass flashing, plus the field boot chain (BootROM → MB1/MB2 → OP-TEE → UEFI Secure Boot → LUKS → dm-verity → IMA → attestation) with the exact software components at every stage
+- **Layered protection for the model:** PKC-signed boot chain, UEFI PK/KEK/db/dbx with real `.auth` updates, payload-encrypted kernel/initrd, LUKS keys derived per device by OP-TEE's `luks-srv`, a dm-verity-anchored detector, and a separate PCR-gated model key
+- **fTPM remote attestation done properly:** EK vs AK roles, `MakeCredential` / `ActivateCredential` binding, the `TPM_GENERATED_VALUE` rule that stops forged quotes, and a short-lived session token bound to the device's mTLS key (RFC 8705)
+- **ISO/SAE 21434 TARA of the attestation path:** 13 threat scenarios with attack-potential feasibility, risk before and after treatment, cybersecurity goals and verifiable requirements
+- **14 attack scenarios** in the simulation (forged fuse blob, disk theft, `.auth` replay, downgrade, TA left open, quote replay, forged event log, unattested analytics…), each showing which control stops it
+
 ---
 
 ## 🤖 AI Security
